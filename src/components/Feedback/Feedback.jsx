@@ -1,6 +1,5 @@
-// import PropTypes from 'prop-types';
 import { Component } from 'react';
-import Block from './Bloc';
+import Block from './Block';
 import FeedbackOptions from './FeedbackActions';
 import Statistics from './FeedbackResul';
 

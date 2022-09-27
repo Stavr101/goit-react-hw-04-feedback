@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Block = ({ title, children }) => {
   return (
     <div>
@@ -8,3 +10,7 @@ const Block = ({ title, children }) => {
 };
 
 export default Block;
+
+Block.propTypes = {
+  title: PropTypes.string,
+};
