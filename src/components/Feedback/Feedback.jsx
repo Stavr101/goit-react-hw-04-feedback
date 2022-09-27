@@ -1,5 +1,8 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Component } from 'react';
+import Block from './Bloc';
+import FeedbackOptions from './FeedbackActions';
+import Statistics from './FeedbackResul';
 
 export default class Feedback extends Component {
   state = {
@@ -7,22 +10,51 @@ export default class Feedback extends Component {
     neutral: 0,
     bad: 0,
   };
+
+  countTotalFeedback() {
+    const { good, neutral, bad } = this.state;
+
+    return good + neutral + bad;
+  }
+
+  countPositiveFeedbackPercentage() {
+    const total = this.countTotalFeedback();
+
+    if (!total) {
+      return 0;
+    }
+    const value = this.state.good;
+    const result = (value / total) * 100;
+    return Number(Math.round(result));
+  }
+
+  leaveFeedback = propertyName => {
+    this.setState(prevState => {
+      const value = prevState[propertyName];
+
+      return { [propertyName]: value + 1 };
+    });
+  };
+
   render() {
     const { good, neutral, bad } = this.state;
+    const total = this.countTotalFeedback();
+    const positivePercent = this.countPositiveFeedbackPercentage();
+
     return (
       <div>
-        <div>
-          <h1>Please leave feedback</h1>
-          <button>Good</button>
-          <button>Neutral</button>
-          <button>Bad</button>
-        </div>
-        <div>
-          <h2>Statistics</h2>
-          <p>Good: {good} </p>
-          <p>Neutral: {neutral} </p>
-          <p>Bad: {bad} </p>
-        </div>
+        <Block title="Please leave feedback">
+          <FeedbackOptions leaveFeedback={this.leaveFeedback} />
+        </Block>
+        <Block title="Statistics">
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={total}
+            positivePercent={positivePercent}
+          />
+        </Block>
       </div>
     );
   }
