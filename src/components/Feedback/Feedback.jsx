@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import Block from './Block';
-import FeedbackOptions from './FeedbackActions';
+import FeedbackOptions from './FeedbackOptions';
 import Statistics from './FeedbackResul';
 
 export default class Feedback extends Component {
@@ -43,7 +43,10 @@ export default class Feedback extends Component {
     return (
       <div>
         <Block title="Please leave feedback">
-          <FeedbackOptions leaveFeedback={this.leaveFeedback} />
+          <FeedbackOptions
+            options={this.state}
+            leaveFeedback={this.leaveFeedback}
+          />
         </Block>
         <Block title="Statistics">
           <Statistics
