@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function FeedbackOptions({ options, leaveFeedback }) {
   const names = Object.keys(options);
-  // console.log(names);
+  // console.log(options);
 
   const elements = names.map((name, index) => {
     console.log();
