@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Statistics({
@@ -10,7 +9,6 @@ export default function Statistics({
 }) {
   return (
     <>
-      {' '}
       {!total ? (
         <div>There is no feedback</div>
       ) : (

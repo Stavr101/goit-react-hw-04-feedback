@@ -14,13 +14,11 @@ export default function Feedback() {
   };
 
   const countPositiveFeedbackPercentage = property => {
-    const total = countTotalFeedback();
-
     if (!countTotalFeedback()) {
       return 0;
     }
-    const value = property;
-    const result = (value / total) * 100;
+
+    const result = (good / countTotalFeedback()) * 100;
     return Number(Math.round(result));
   };
 
@@ -37,15 +35,11 @@ export default function Feedback() {
     }
   };
 
-  // const positivePercent = countPositiveFeedbackPercentage(good);
-  // const neutralFeedback = countPositiveFeedbackPercentage('neutral');
-  // const badFeedback = countPositiveFeedbackPercentage('bad');
-
   return (
     <div>
       <Block title="Please leave feedback">
         <FeedbackOptions
-          options={(good, neutral, bad)}
+          options={['good', 'neutral', 'bad']}
           leaveFeedback={leaveFeedback}
         />
       </Block>
@@ -54,69 +48,10 @@ export default function Feedback() {
           good={good}
           neutral={neutral}
           bad={bad}
-          total={countTotalFeedback}
-          positivePercent={countPositiveFeedbackPercentage}
+          total={countTotalFeedback()}
+          positivePercent={countPositiveFeedbackPercentage()}
         />
       </Block>
     </div>
   );
 }
-
-// export default class Feedback extends Component {
-//   state = {
-//     good: 0,
-//     neutral: 0,
-//     bad: 0,
-//   };
-
-// countTotalFeedback() {
-//   const { good, neutral, bad } = this.state;
-
-//   return good + neutral + bad;
-// }
-
-// countPositiveFeedbackPercentage() {
-//   const total = this.countTotalFeedback();
-
-//   if (!total) {
-//     return 0;
-//   }
-//   const value = this.state.good;
-//   const result = (value / total) * 100;
-//   return Number(Math.round(result));
-// }
-
-// leaveFeedback = propertyName => {
-//   this.setState(prevState => {
-//     const value = prevState[propertyName];
-
-//     return { [propertyName]: value + 1 };
-//   });
-// };
-
-// render() {
-// const { good, neutral, bad } = this.state;
-// const total = this.countTotalFeedback();
-// const positivePercent = this.countPositiveFeedbackPercentage();
-
-// return (
-//   <div>
-//     <Block title="Please leave feedback">
-//       <FeedbackOptions
-//         options={this.state}
-//         leaveFeedback={this.leaveFeedback}
-//       />
-//     </Block>
-//     <Block title="Statistics">
-//       <Statistics
-//         good={good}
-//         neutral={neutral}
-//         bad={bad}
-//         total={total}
-//         positivePercent={positivePercent}
-//       />
-//     </Block>
-//   </div>
-// );
-//   }
-// }
