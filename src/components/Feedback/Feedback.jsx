@@ -12,13 +12,14 @@ export default function Feedback() {
   const countTotalFeedback = () => {
     return good + neutral + bad;
   };
+  const countTotal = countTotalFeedback();
 
   const countPositiveFeedbackPercentage = property => {
-    if (!countTotalFeedback()) {
+    if (!countTotal) {
       return 0;
     }
 
-    const result = (good / countTotalFeedback()) * 100;
+    const result = (good / countTotal) * 100;
     return Number(Math.round(result));
   };
 
@@ -48,7 +49,7 @@ export default function Feedback() {
           good={good}
           neutral={neutral}
           bad={bad}
-          total={countTotalFeedback()}
+          total={countTotal}
           positivePercent={countPositiveFeedbackPercentage()}
         />
       </Block>
